@@ -53,17 +53,21 @@ public class UtilityCellTest extends TestCase {
 	public void testRent() {
 		UtilityCell u1 =
 			(UtilityCell) gameMaster.getGameBoard().queryCell("Utility 1");
-		int cellIndex1 = gameMaster.getGameBoard().queryCellIndex("Utility 1");
-		gameMaster.movePlayer(0, cellIndex1);
+		gameMaster();
 		gameMaster.getPlayer(0).purchase();
 		assertEquals(40, u1.getRent(10));
 
 		UtilityCell u2 =
 			(UtilityCell) gameMaster.getGameBoard().queryCell("Utility 2");
-		int cellIndex2 = gameMaster.getGameBoard().queryCellIndex("Utility 2");
-		gameMaster.movePlayer(0, cellIndex2 - cellIndex1);
 		gameMaster.getPlayer(0).purchase();
 		assertEquals(100, u1.getRent(10));
 		assertEquals(100, u2.getRent(10));
+	}
+
+	private void gameMaster() {
+		int cellIndex1 = gameMaster.getGameBoard().queryCellIndex("Utility 1");
+		gameMaster.movePlayer(0, cellIndex1);
+		int cellIndex2 = gameMaster.getGameBoard().queryCellIndex("Utility 2");
+		gameMaster.movePlayer(0, cellIndex2 - cellIndex1);
 	}
 }
